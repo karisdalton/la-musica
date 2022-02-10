@@ -3,11 +3,10 @@ import { useAuth } from "../context/AuthContext";
 import lamusica from "../images/lamusicatext.png";
 import { Link, useNavigate } from "react-router-dom";
 
-function SignUp() {
+function Login() {
 	const emailRef = useRef();
 	const passwordRef = useRef();
-	const passwordConfRef = useRef();
-	const { signUp } = useAuth();
+	const { logIn } = useAuth();
 	const [error, setError] = useState("");
 	const [loading, setLoading] = useState(false);
 	const navigate = useNavigate();
@@ -15,17 +14,13 @@ function SignUp() {
 	async function handleSubmit(e) {
 		e.preventDefault();
 
-		if (passwordRef.current.value !== passwordConfRef.current.value) {
-			return setError("Passwords do not match");
-		}
-
 		try {
 			setError("");
 			setLoading(true);
-			await signUp(emailRef.current.value, passwordRef.current.value);
+			await logIn(emailRef.current.value, passwordRef.current.value);
 			navigate("/");
 		} catch (err) {
-			setError("Failed to create an account");
+			setError("Failed to sign in");
 			console.log(err);
 		}
 		setLoading(false);
@@ -69,24 +64,12 @@ function SignUp() {
 								className="border mt-1 border-blue-500 p-2 rounded-md focus:outline-0"
 							/>
 						</div>
-						<div className="p-2 flex flex-col">
-							<label htmlFor="password-confirmation" className="text-slate-700">
-								Password Confirmation
-							</label>
-							<input
-								type="password"
-								name="password-confirmation"
-								id="password-confirmation"
-								ref={passwordConfRef}
-								className="border mt-1 border-blue-500 p-2 rounded-md focus:outline-0"
-							/>
-						</div>
 					</div>
 					<button
 						type="submit"
 						disabled={loading}
 						className="p-2 text-white w-1/2 mb-4 ml-28 rounded-md bg-blue-600 focus:outline-0">
-						Create an account
+						Log In
 					</button>
 					<p className="text-sm text-slate-600 text-center">Or sign in with</p>
 					<div>
@@ -97,10 +80,9 @@ function SignUp() {
 						</button>
 					</div>
 					<p className="text-center text-sm">
-						Already have an account?
-						<Link to="/login" className="text-blue-500">
-							{" "}
-							Log In
+						Don't have an account?
+						<Link to="/signup" className="text-blue-500">
+							Sign Up
 						</Link>
 					</p>
 				</form>
@@ -109,4 +91,4 @@ function SignUp() {
 	);
 }
 
-export default SignUp;
+export default Login;
