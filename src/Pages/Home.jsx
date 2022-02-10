@@ -1,14 +1,11 @@
 import React from "react";
-import SideNav from "./SideNav";
-import Navbar from "./Navbar";
+import Music from "../components/Music";
 
 function Home() {
 	return (
 		<div className="flex">
-			<SideNav />
 			<div className="flex-3 w-full">
-				<Navbar />
-				<h1>My Music</h1>
+				<Music />
 			</div>
 		</div>
 	);

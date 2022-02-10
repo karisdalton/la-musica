@@ -1,61 +1,135 @@
-import React from "react";
-import logo from "../images/lamusica1.png";
+import React, { useState } from "react";
 import {
 	IoCloudUploadOutline,
 	IoCompassOutline,
+	IoHeartOutline,
 	IoHomeOutline,
+	IoMusicalNotesOutline,
 	IoSearchOutline,
 } from "react-icons/io5";
 import { MdPlaylistPlay } from "react-icons/md";
+import { Link } from "react-router-dom";
 
 function SideNav() {
+	const [activeItemIndex, setActiveItemIndex] = useState(0);
+
 	return (
-		<div className="flex-2 w-1/5 h-screen p-2 border-r border-blue-500">
-			<img src={logo} alt="logo" className="w-36 h-28" />
+		<div className="relative">
+			<div className="flex-2 w-1/5 fixed left-0 top-14 h-screen p-2 border-r border-slate-200">
+				<h1 className="text-lg uppercase font-bold py-2 pl-1 border-b border-slate-200">
+					Library
+				</h1>
 
-			<h1 className="text-lg uppercase font-bold py-2 pl-1">Library</h1>
+				<div className="flex flex-col pt-2">
+					<Link
+						to="/"
+						onClick={() => setActiveItemIndex(0)}
+						className={
+							activeItemIndex === 0
+								? "flex mb-4 p-1 items-center border-l-2 border-l-blue-700 text-sky-500"
+								: "flex mb-4 p-1 items-center"
+						}>
+						<span className="mr-2">
+							<IoHomeOutline />
+						</span>
+						Home
+					</Link>
+					<Link
+						to="/mymusic"
+						onClick={() => setActiveItemIndex(1)}
+						className={
+							activeItemIndex === 1
+								? "flex mb-4 p-1 items-center border-l-2 border-l-blue-700 text-sky-500"
+								: "flex mb-4 p-1 items-center"
+						}>
+						<span className="mr-2">
+							<IoMusicalNotesOutline />
+						</span>
+						My Music
+					</Link>
+					<Link
+						to="/search"
+						onClick={() => setActiveItemIndex(2)}
+						className={
+							activeItemIndex === 2
+								? "flex mb-4 p-1 items-center border-l-2 border-l-blue-700 text-sky-500"
+								: "flex mb-4 p-1 items-center"
+						}>
+						<span className="mr-2">
+							<IoSearchOutline />
+						</span>
+						Search
+					</Link>
+					<Link
+						to="/likedsongs"
+						onClick={() => setActiveItemIndex(3)}
+						className={
+							activeItemIndex === 3
+								? "flex mb-4 p-1 items-center border-l-2 border-l-blue-700 text-sky-500"
+								: "flex mb-4 p-1 items-center"
+						}>
+						<span className="mr-2">
+							<IoHeartOutline />
+						</span>
+						Liked Songs
+					</Link>
+					<Link
+						to="/uploads"
+						onClick={() => setActiveItemIndex(4)}
+						className={
+							activeItemIndex === 4
+								? "flex mb-4 p-1 items-center border-l-2 border-l-blue-700 text-sky-500"
+								: "flex mb-4 p-1 items-center"
+						}>
+						<span className="mr-2">
+							<IoCloudUploadOutline />
+						</span>
+						Uploads
+					</Link>
+					<Link
+						to="/about"
+						onClick={() => setActiveItemIndex(5)}
+						className={
+							activeItemIndex === 5
+								? "flex mb-4 p-1 items-center border-l-2 border-l-blue-700 text-sky-500"
+								: "flex mb-4 p-1 items-center"
+						}>
+						<span className="mr-2">
+							<IoCompassOutline />
+						</span>
+						About
+					</Link>
+				</div>
+				<h1 className="text-lg uppercase font-bold py-2 pl-1 border-t border-b border-slate-200">
+					my playlist
+				</h1>
 
-			<div className="flex flex-col">
-				<button className="flex mb-4 p-1 items-center border-l-2 border-l-blue-700">
-					<span className="mr-2 text-blue-600">
-						<IoHomeOutline />
-					</span>
-					Home
-				</button>
-				<button className="flex mb-4 p-1 items-center focus:border-l-2 focus:border-l-blue-700">
-					<span className="mr-2">
-						<IoSearchOutline />
-					</span>
-					Search
-				</button>
-				<button className="flex mb-4 p-1 items-center focus:border-l-2 focus:border-l-blue-700">
-					<span className="mr-2">
-						<IoCloudUploadOutline />
-					</span>
-					Uploads
-				</button>
-				<button className="flex mb-4 p-1 items-center focus:border-l-2 focus:border-l-blue-700">
-					<span className="mr-2">
-						<IoCompassOutline />
-					</span>
-					About
-				</button>
-			</div>
-			<h1 className="text-lg uppercase font-bold py-2 pl-1">my playlist</h1>
-
-			<div className="flex flex-col">
-				<button className="flex mb-4 p-1 items-center border-l-2 border-l-blue-700">
-					<span className="mr-2">
-						<MdPlaylistPlay />
-					</span>
-					Eminem
-				</button>
-				<button className="flex mb-4 p-1 items-center focus:border-l-2 focus:border-l-blue-700">
-					<span className="mr-2">
-						<MdPlaylistPlay />
-					</span>
-					Rap Caviar
-				</button>
+				<div className="flex flex-col pt-2">
+					<button
+						onClick={() => setActiveItemIndex(6)}
+						className={
+							activeItemIndex === 6
+								? "flex mb-4 p-1 items-center border-l-2 border-l-blue-700 text-sky-500"
+								: "flex mb-4 p-1 items-center"
+						}>
+						<span className="mr-2">
+							<MdPlaylistPlay />
+						</span>
+						Eminem
+					</button>
+					<button
+						onClick={() => setActiveItemIndex(7)}
+						className={
+							activeItemIndex === 7
+								? "flex mb-4 p-1 items-center border-l-2 border-l-blue-700 text-sky-500"
+								: "flex mb-4 p-1 items-center"
+						}>
+						<span className="mr-2">
+							<MdPlaylistPlay />
+						</span>
+						Rap Caviar
+					</button>
+				</div>
 			</div>
 		</div>
 	);

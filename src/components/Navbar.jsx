@@ -1,13 +1,18 @@
 import React from "react";
 import profile from "../images/lamusica1.png";
 import { IoSearchOutline } from "react-icons/io5";
+import { Link } from "react-router-dom";
+import logo from "../images/logodark.png";
 
 function Navbar() {
 	return (
-		<div className="flex justify-between py-2 px-4">
+		<div className="flex fixed z-50 bg-white shadow-sm top-0 left-0 right-0 justify-between py-2 px-4 border-b border-b-slate-200">
+			<Link to="/">
+				<img src={logo} alt="logo" className="w-52 px-0 h-10 object-cover" />
+			</Link>
 			<label className="relative block w-1/2">
 				<span className="sr-only">Search</span>
-				<span className="absolute inset-y-0 left-0 flex items-center pl-2">
+				<span className="absolute inset-y-0 left-0 flex items-center pl-2 text-slate-300">
 					<IoSearchOutline />
 				</span>
 				<input
@@ -18,14 +23,18 @@ function Navbar() {
 			</label>
 			<div className="flex">
 				<div className="flex">
-					<button className="mr-3 bg-blue-300 px-4 text-gray-700 border border-blue-400 rounded-md hover:bg-blue-400">
+					<Link
+						to="/login"
+						className="mr-3 bg-blue-300 py-1 px-4 w-20 h-10 text-gray-700 text-center border border-blue-400 rounded-md hover:bg-blue-400">
 						Log in
-					</button>
-					<button className="bg-blue-500 py-1 px-4 text-white border border-blue-600 rounded-md hover:bg-blue-600">
+					</Link>
+					<Link
+						to="/signup"
+						className="bg-blue-500 py-1 px-4 w-24 h-10 text-white text-center border border-blue-600 rounded-md hover:bg-blue-600">
 						Sign up
-					</button>
+					</Link>
 				</div>
-				<div className="shrink-0 ml-2">
+				<div className="shrink-0 ml-4">
 					<img
 						src={profile}
 						alt="profile"
