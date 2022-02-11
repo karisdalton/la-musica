@@ -27,7 +27,7 @@ function SideNav() {
 						className={
 							activeItemIndex === 0
 								? "flex mb-4 p-1 items-center border-l-2 border-l-blue-700 text-sky-500"
-								: "flex mb-4 p-1 items-center"
+								: "flex mb-4 p-1 items-center hover:text-sky-500"
 						}>
 						<span className="mr-2">
 							<IoHomeOutline />
@@ -40,7 +40,7 @@ function SideNav() {
 						className={
 							activeItemIndex === 1
 								? "flex mb-4 p-1 items-center border-l-2 border-l-blue-700 text-sky-500"
-								: "flex mb-4 p-1 items-center"
+								: "flex mb-4 p-1 items-center hover:text-sky-500"
 						}>
 						<span className="mr-2">
 							<IoMusicalNotesOutline />
@@ -53,7 +53,7 @@ function SideNav() {
 						className={
 							activeItemIndex === 2
 								? "flex mb-4 p-1 items-center border-l-2 border-l-blue-700 text-sky-500"
-								: "flex mb-4 p-1 items-center"
+								: "flex mb-4 p-1 items-center hover:text-sky-500"
 						}>
 						<span className="mr-2">
 							<IoSearchOutline />
@@ -66,7 +66,7 @@ function SideNav() {
 						className={
 							activeItemIndex === 3
 								? "flex mb-4 p-1 items-center border-l-2 border-l-blue-700 text-sky-500"
-								: "flex mb-4 p-1 items-center"
+								: "flex mb-4 p-1 items-center hover:text-sky-500"
 						}>
 						<span className="mr-2">
 							<IoHeartOutline />
@@ -79,7 +79,7 @@ function SideNav() {
 						className={
 							activeItemIndex === 4
 								? "flex mb-4 p-1 items-center border-l-2 border-l-blue-700 text-sky-500"
-								: "flex mb-4 p-1 items-center"
+								: "flex mb-4 p-1 items-center hover:text-sky-500"
 						}>
 						<span className="mr-2">
 							<IoCloudUploadOutline />
@@ -92,7 +92,7 @@ function SideNav() {
 						className={
 							activeItemIndex === 5
 								? "flex mb-4 p-1 items-center border-l-2 border-l-blue-700 text-sky-500"
-								: "flex mb-4 p-1 items-center"
+								: "flex mb-4 p-1 items-center hover:text-sky-500"
 						}>
 						<span className="mr-2">
 							<IoCompassOutline />
@@ -110,7 +110,7 @@ function SideNav() {
 						className={
 							activeItemIndex === 6
 								? "flex mb-4 p-1 items-center border-l-2 border-l-blue-700 text-sky-500"
-								: "flex mb-4 p-1 items-center"
+								: "flex mb-4 p-1 items-center hover:text-sky-500"
 						}>
 						<span className="mr-2">
 							<MdPlaylistPlay />
@@ -122,7 +122,7 @@ function SideNav() {
 						className={
 							activeItemIndex === 7
 								? "flex mb-4 p-1 items-center border-l-2 border-l-blue-700 text-sky-500"
-								: "flex mb-4 p-1 items-center"
+								: "flex mb-4 p-1 items-center hover:text-sky-500"
 						}>
 						<span className="mr-2">
 							<MdPlaylistPlay />
