@@ -10,6 +10,12 @@ const spotifyApi = new SpotifyWebApi({
 function SpSearch({ accessToken }) {
 	const [search, setSearch] = useState("");
 	const [searchResults, setSearchResults] = useState([]);
+	const [playingTrack, setPlayingTrack] = useState([]);
+
+	function chooseTrack(track) {
+		setPlayingTrack(track);
+		setSearch("");
+	}
 
 	useEffect(() => {
 		if (!accessToken) return;
@@ -64,7 +70,11 @@ function SpSearch({ accessToken }) {
 				<span className="text-2xl text-green-500 italic">Search Results</span>
 				<div className="flex flex-wrap justify-between mb-20 mt-4">
 					{searchResults.map((track) => (
-						<SpTrackResult track={track} key={track.uri} />
+						<SpTrackResult
+							track={track}
+							key={track.uri}
+							chooseTrack={chooseTrack}
+						/>
 					))}
 				</div>
 			</div>
