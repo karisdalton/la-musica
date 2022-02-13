@@ -6,9 +6,14 @@ import { AuthProvider } from "./context/AuthContext";
 import MusicList from "./Pages/MusicList";
 import Navbar from "./components/Navbar";
 import SideNav from "./components/SideNav";
+import Player from "./components/Player";
 import LikedSongs from "./Pages/LikedSongs";
 import Search from "./Pages/Search";
 import Uploads from "./Pages/Uploads";
+import SpotifyLogin from "./spotify/SpotifyLogin";
+import SpDashboard from "./spotify/SpDashboard";
+
+const code = new URLSearchParams(window.location.search).get("code");
 
 function App() {
 	return (
@@ -25,7 +30,13 @@ function App() {
 						<Route element={<LikedSongs />} path="/likedsongs" />
 						<Route element={<Search />} path="/search" />
 						<Route element={<Uploads />} path="/uploads" />
+						{code ? (
+							<Route element={<SpDashboard />} path="/spDashboard" />
+						) : (
+							<Route element={<SpotifyLogin />} path="/spotifylogin" />
+						)}
 					</Routes>
+					<Player />
 				</Router>
 			</div>
 		</AuthProvider>

@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.css": "/static/css/main.0a2e4521.css",
+    "main.js": "/static/js/main.b433d8f0.js",
+    "static/media/notAvailable.jpg": "/static/media/notAvailable.776cd01bb8e24cfad966.jpg",
+    "static/media/lamusicatext.png": "/static/media/lamusicatext.d13057a046faf76adfae.png",
+    "static/media/logodark.png": "/static/media/logodark.78b02911972f38658992.png",
+    "static/media/lamusica_transparent.png": "/static/media/lamusica_transparent.647ae5b499d54d49801f.png",
+    "index.html": "/index.html",
+    "main.0a2e4521.css.map": "/static/css/main.0a2e4521.css.map",
+    "main.b433d8f0.js.map": "/static/js/main.b433d8f0.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.0a2e4521.css",
+    "static/js/main.b433d8f0.js"
+  ]
+}

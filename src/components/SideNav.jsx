@@ -8,7 +8,10 @@ import {
 	IoSearchOutline,
 } from "react-icons/io5";
 import { MdPlaylistPlay } from "react-icons/md";
+import { RiSpotifyLine } from "react-icons/ri";
 import { Link } from "react-router-dom";
+
+const code = new URLSearchParams(window.location.search).get("code");
 
 function SideNav() {
 	const [activeItemIndex, setActiveItemIndex] = useState(0);
@@ -60,11 +63,40 @@ function SideNav() {
 						</span>
 						Search
 					</Link>
+					{code ? (
+						<Link
+							to="/spDashboard"
+							onClick={() => setActiveItemIndex(3)}
+							className={
+								activeItemIndex === 3
+									? "flex mb-4 p-1 items-center border-l-2 border-l-blue-700 text-sky-500"
+									: "flex mb-4 p-1 items-center hover:text-sky-500"
+							}>
+							<span className="mr-2">
+								<RiSpotifyLine />
+							</span>
+							Stream on Spotify
+						</Link>
+					) : (
+						<Link
+							to="/spotifylogin"
+							onClick={() => setActiveItemIndex(3)}
+							className={
+								activeItemIndex === 3
+									? "flex mb-4 p-1 items-center border-l-2 border-l-blue-700 text-sky-500"
+									: "flex mb-4 p-1 items-center hover:text-sky-500"
+							}>
+							<span className="mr-2">
+								<RiSpotifyLine />
+							</span>
+							Stream on Spotify
+						</Link>
+					)}
 					<Link
 						to="/likedsongs"
-						onClick={() => setActiveItemIndex(3)}
+						onClick={() => setActiveItemIndex(4)}
 						className={
-							activeItemIndex === 3
+							activeItemIndex === 4
 								? "flex mb-4 p-1 items-center border-l-2 border-l-blue-700 text-sky-500"
 								: "flex mb-4 p-1 items-center hover:text-sky-500"
 						}>
@@ -75,9 +107,9 @@ function SideNav() {
 					</Link>
 					<Link
 						to="/uploads"
-						onClick={() => setActiveItemIndex(4)}
+						onClick={() => setActiveItemIndex(5)}
 						className={
-							activeItemIndex === 4
+							activeItemIndex === 5
 								? "flex mb-4 p-1 items-center border-l-2 border-l-blue-700 text-sky-500"
 								: "flex mb-4 p-1 items-center hover:text-sky-500"
 						}>
@@ -88,9 +120,9 @@ function SideNav() {
 					</Link>
 					<Link
 						to="/about"
-						onClick={() => setActiveItemIndex(5)}
+						onClick={() => setActiveItemIndex(6)}
 						className={
-							activeItemIndex === 5
+							activeItemIndex === 6
 								? "flex mb-4 p-1 items-center border-l-2 border-l-blue-700 text-sky-500"
 								: "flex mb-4 p-1 items-center hover:text-sky-500"
 						}>
@@ -106,9 +138,9 @@ function SideNav() {
 
 				<div className="flex flex-col pt-2">
 					<button
-						onClick={() => setActiveItemIndex(6)}
+						onClick={() => setActiveItemIndex(7)}
 						className={
-							activeItemIndex === 6
+							activeItemIndex === 7
 								? "flex mb-4 p-1 items-center border-l-2 border-l-blue-700 text-sky-500"
 								: "flex mb-4 p-1 items-center hover:text-sky-500"
 						}>
@@ -118,9 +150,9 @@ function SideNav() {
 						Eminem
 					</button>
 					<button
-						onClick={() => setActiveItemIndex(7)}
+						onClick={() => setActiveItemIndex(8)}
 						className={
-							activeItemIndex === 7
+							activeItemIndex === 8
 								? "flex mb-4 p-1 items-center border-l-2 border-l-blue-700 text-sky-500"
 								: "flex mb-4 p-1 items-center hover:text-sky-500"
 						}>
