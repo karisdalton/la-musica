@@ -65,7 +65,7 @@ function SideNav() {
 					</Link>
 					{code ? (
 						<Link
-							to="/spDashboard"
+							to="/spdashboard"
 							onClick={() => setActiveItemIndex(3)}
 							className={
 								activeItemIndex === 3
@@ -79,7 +79,7 @@ function SideNav() {
 						</Link>
 					) : (
 						<Link
-							to="/spotifylogin"
+							to="/splogin"
 							onClick={() => setActiveItemIndex(3)}
 							className={
 								activeItemIndex === 3

@@ -4,7 +4,7 @@ import "react-h5-audio-player/lib/styles.css";
 
 function Player() {
 	return (
-		<div className="fixed bottom-0 left-[17.1rem] right-0">
+		<div className="fixed bottom-0 left-[16.9rem] right-0">
 			<AudioPlayer showSkipControls={true} />
 		</div>
 	);

@@ -10,7 +10,7 @@ import Player from "./components/Player";
 import LikedSongs from "./Pages/LikedSongs";
 import Search from "./Pages/Search";
 import Uploads from "./Pages/Uploads";
-import SpotifyLogin from "./spotify/SpotifyLogin";
+import SpLogin from "./spotify/SpLogin";
 import SpDashboard from "./spotify/SpDashboard";
 
 const code = new URLSearchParams(window.location.search).get("code");
@@ -31,9 +31,12 @@ function App() {
 						<Route element={<Search />} path="/search" />
 						<Route element={<Uploads />} path="/uploads" />
 						{code ? (
-							<Route element={<SpDashboard />} path="/spDashboard" />
+							<Route
+								element={<SpDashboard code={code} />}
+								path="/spdashboard"
+							/>
 						) : (
-							<Route element={<SpotifyLogin />} path="/spotifylogin" />
+							<Route element={<SpLogin />} path="/splogin" />
 						)}
 					</Routes>
 					<Player />

@@ -1,7 +1,7 @@
 import React from "react";
 import profile from "../images/lamusica1.png";
-import { IoSearchOutline } from "react-icons/io5";
 import { Link } from "react-router-dom";
+import Search from "./Search";
 import logo from "../images/logodark.png";
 
 function Navbar() {
@@ -10,17 +10,7 @@ function Navbar() {
 			<Link to="/">
 				<img src={logo} alt="logo" className="w-52 px-0 h-10 object-cover" />
 			</Link>
-			<label className="relative block w-1/2">
-				<span className="sr-only">Search</span>
-				<span className="absolute inset-y-0 left-0 flex items-center pl-2 text-slate-300">
-					<IoSearchOutline />
-				</span>
-				<input
-					type="text"
-					className="w-full border block py-2 pl-9 rounded-md border-slate-300 focus:outline-0 placeholder:italic placeholder:text-slate-400 shadow-sm focus:border-sky-500 focus:ring-sky-500 focus:ring-1"
-					placeholder="Search for music..."
-				/>
-			</label>
+			<Search />
 			<div className="flex">
 				<div className="flex">
 					<Link
