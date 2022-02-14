@@ -132,7 +132,7 @@ function SideNav() {
 						About
 					</Link>
 				</div>
-				<h1 className="text-lg uppercase font-bold py-2 pl-1 border-t border-b border-slate-200">
+				{/* <h1 className="text-lg uppercase font-bold py-2 pl-1 border-t border-b border-slate-200">
 					my playlist
 				</h1>
 
@@ -161,7 +161,7 @@ function SideNav() {
 						</span>
 						Rap Caviar
 					</button>
-				</div>
+				</div> */}
 			</div>
 		</div>
 	);

@@ -58,7 +58,7 @@ function SignUp() {
 					Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur,
 					eum!
 				</p>
-				<form className="mb-4" onSubmit={handleSubmit}>
+				<form className="mb-2" onSubmit={handleSubmit}>
 					{error && <p className="text-sm text-red-600 px-2 pt-2">{error}</p>}
 					<div className="flex flex-col">
 						<div className="p-2 flex flex-col">
@@ -101,7 +101,7 @@ function SignUp() {
 					<button
 						type="submit"
 						disabled={loading}
-						className="p-2 text-white w-1/2 mb-4 ml-28 rounded-md bg-blue-600 focus:outline-0">
+						className="p-2 text-white w-1/2 mb-2 ml-28 rounded-md bg-blue-600 focus:outline-0">
 						Create an account
 					</button>
 				</form>

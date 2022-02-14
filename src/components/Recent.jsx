@@ -58,7 +58,7 @@ function Recent() {
 						<p className="text-sm text-slate-500">Two Steps from Hell</p>
 					</div>
 				</div>
-				<div className="hover:shadow-2xl cursor-pointer transition ease-in-out delay-200 w-1/5 h-60 mr-9 last:mr-0 border border-slate-600 bg-slate-100">
+				<div className="hover:shadow-2xl cursor-pointer transition ease-in-out delay-200 w-1/5 h-60 mr-9 mb-3 last:mr-0 border border-slate-600 bg-slate-100">
 					<span className="">
 						<img
 							src={music}
