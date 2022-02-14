@@ -3,13 +3,12 @@ import { useAuth } from "../context/AuthContext";
 import lamusica from "../images/lamusicatext.png";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 
-function Login() {
+function PasswordReset() {
 	const emailRef = useRef();
-	const passwordRef = useRef();
-	const { logIn } = useAuth();
+	const { resetPassword } = useAuth();
 	const [error, setError] = useState("");
 	const [loading, setLoading] = useState(false);
-	const navigate = useNavigate();
+	const [message, setMessage] = useState("");
 	const location = useLocation();
 
 	let from = location.state?.from?.pathname || "/";
@@ -18,12 +17,13 @@ function Login() {
 		e.preventDefault();
 
 		try {
+			setMessage("");
 			setError("");
 			setLoading(true);
-			await logIn(emailRef.current.value, passwordRef.current.value);
-			navigate(from, { replace: true });
+			await resetPassword(emailRef.current.value);
+			setMessage("Check your inbox for further instructions");
 		} catch (err) {
-			setError("Failed to sign in");
+			setError("Failed to reset password");
 			console.log(err);
 		}
 		setLoading(false);
@@ -42,6 +42,9 @@ function Login() {
 				</p>
 				<form className="mb-4" onSubmit={handleSubmit}>
 					{error && <p className="text-sm text-red-600 px-2 pt-2">{error}</p>}
+					{message && (
+						<p className="text-sm text-green-600 px-2 pt-2">{message}</p>
+					)}
 					<div className="flex flex-col">
 						<div className="p-2 flex flex-col">
 							<label htmlFor="email" className="text-slate-700">
@@ -55,38 +58,20 @@ function Login() {
 								className="border border-blue-500 p-2 mt-1 rounded-md focus:outline-0"
 							/>
 						</div>
-						<div className="p-2 flex flex-col">
-							<label htmlFor="password" className="text-slate-700">
-								Password
-							</label>
-							<input
-								type="password"
-								name="password"
-								id="password"
-								ref={passwordRef}
-								className="border mt-1 border-blue-500 p-2 rounded-md focus:outline-0"
-							/>
-						</div>
 					</div>
 					<button
 						type="submit"
 						disabled={loading}
 						className="p-2 text-white w-1/2 mb-2 ml-28 rounded-md bg-blue-600 focus:outline-0">
-						Log In
+						Reset Password
 					</button>
 					<div className="text-center transition-all text-sky-500 hover:underline mb-4">
-						<Link to="/password-reset">Forgot Password?</Link>
+						<Link to="/login">Login</Link>
 					</div>
-					<p className="text-center text-sm">
-						Don't have an account?
-						<Link to="/signup" className="text-blue-500">
-							Sign Up
-						</Link>
-					</p>
 				</form>
 			</div>
 		</div>
 	);
 }
 
-export default Login;
+export default PasswordReset;

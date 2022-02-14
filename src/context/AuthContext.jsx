@@ -15,12 +15,28 @@ export function AuthProvider({ children }) {
 		return auth.createUserWithEmailAndPassword(email, password);
 	}
 
+	function signInWithGoogle(google_provider) {
+		return auth.signInWithPopup(google_provider);
+	}
+
 	function logIn(email, password) {
 		return auth.signInWithEmailAndPassword(email, password);
 	}
 
 	function logOut() {
 		return auth.signOut();
+	}
+
+	function resetPassword(email) {
+		return auth.sendPasswordResetEmail(email);
+	}
+
+	function updateEmail(email) {
+		return currentUser.updateEmail(email);
+	}
+
+	function updatePassword(password) {
+		return currentUser.updatePassword(password);
 	}
 
 	useEffect(() => {
@@ -36,6 +52,10 @@ export function AuthProvider({ children }) {
 		signUp,
 		logIn,
 		logOut,
+		resetPassword,
+		updateEmail,
+		updatePassword,
+		signInWithGoogle,
 	};
 
 	return (

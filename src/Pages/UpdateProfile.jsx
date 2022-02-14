@@ -2,65 +2,56 @@ import React, { useRef, useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import lamusica from "../images/lamusicatext.png";
 import { Link, useNavigate } from "react-router-dom";
-import { FcGoogle } from "react-icons/fc";
-import firebase from "firebase/compat/app";
 
 function SignUp() {
 	const emailRef = useRef();
 	const passwordRef = useRef();
 	const passwordConfRef = useRef();
-	const { signUp, signInWithGoogle } = useAuth();
+	const { currentUser, updateEmail, updatePassword } = useAuth();
 	const [error, setError] = useState("");
 	const [loading, setLoading] = useState(false);
 	const navigate = useNavigate();
-	const google_provider = new firebase.auth.GoogleAuthProvider();
 
-	async function handleSubmit(e) {
+	function handleSubmit(e) {
 		e.preventDefault();
 
 		if (passwordRef.current.value !== passwordConfRef.current.value) {
 			return setError("Passwords do not match");
 		}
 
-		try {
-			setError("");
-			setLoading(true);
-			await signUp(emailRef.current.value, passwordRef.current.value);
-			navigate("/");
-		} catch (err) {
-			setError("Failed to create an account");
-			console.log(err);
-		}
-		setLoading(false);
-	}
+		const promises = [];
+		setLoading(true);
+		setError("");
 
-	async function handleGoogle(e) {
-		e.preventDefault();
-
-		try {
-			setError("");
-			await signInWithGoogle(google_provider);
-			navigate("/");
-		} catch (error) {
-			setError("Failed to Sign In with Google");
-			console.log(error);
+		if (emailRef.current.value !== currentUser.email) {
+			promises.push(updateEmail(emailRef.current.value));
 		}
+
+		if (passwordRef.current.value) {
+			promises.push(updatePassword(passwordRef.current.value));
+		}
+
+		Promise.all(promises)
+			.then(() => {
+				navigate("/profile");
+			})
+			.catch(() => {
+				setError("Failed to update account");
+			})
+			.finally(() => setLoading(false));
 	}
 
 	return (
-		<div className="border-2 border-blue-400 shadow-md shadow-gray-300 rounded-lg flex justify-center w-1/2 m-auto mt-24">
+		<div className="p-4 absolute left-72 top-14 w-[calc(100% - 288px)] flex justify-center mx-auto">
 			<div className="">
-				<div className="flex">
-					<h1 className="text-4xl font-bold text-center p-4">Welcome to</h1>
-					<img src={lamusica} alt="logo" className="w-28 h-16" />
-				</div>
+				<h1 className="text-4xl font-bold text-center p-4">Update Profile</h1>
 				<p className="text-sm text-slate-400 p-2">
 					Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur,
 					eum!
 				</p>
 				<form className="mb-4" onSubmit={handleSubmit}>
 					{error && <p className="text-sm text-red-600 px-2 pt-2">{error}</p>}
-					<div className="flex flex-col">
+					<div className="flex flex-col mb-3">
 						<div className="p-2 flex flex-col">
 							<label htmlFor="email" className="text-slate-700">
 								Email
@@ -71,6 +62,7 @@ function SignUp() {
 								id="email"
 								ref={emailRef}
 								className="border border-blue-500 p-2 mt-1 rounded-md focus:outline-0"
+								defaultValue={currentUser.email}
 							/>
 						</div>
 						<div className="p-2 flex flex-col">
@@ -82,7 +74,8 @@ function SignUp() {
 								name="password"
 								id="password"
 								ref={passwordRef}
-								className="border mt-1 border-blue-500 p-2 rounded-md focus:outline-0"
+								className="border mt-1 border-blue-500 p-2 rounded-md focus:outline-0 placeholder:italic placeholder:text-slate-400"
+								placeholder="leave blank to keep the same"
 							/>
 						</div>
 						<div className="p-2 flex flex-col">
@@ -94,35 +87,23 @@ function SignUp() {
 								name="password-confirmation"
 								id="password-confirmation"
 								ref={passwordConfRef}
-								className="border mt-1 border-blue-500 p-2 rounded-md focus:outline-0"
+								className="border mt-1 border-blue-500 p-2 rounded-md focus:outline-0 placeholder:italic placeholder:text-slate-400"
+								placeholder="leave blank to keep the same"
 							/>
 						</div>
 					</div>
 					<button
 						type="submit"
 						disabled={loading}
-						className="p-2 text-white w-1/2 mb-4 ml-28 rounded-md bg-blue-600 focus:outline-0">
-						Create an account
+						className="p-2 cursor-pointer text-white w-1/2 mb-4 ml-28 rounded-md bg-sky-600 focus:outline-0 hover:bg-sky-500 transition-all">
+						Update Profile
 					</button>
-				</form>
-				<div className="mb-4">
-					<p className="text-sm text-slate-600 text-center">Or sign in with</p>
-					<div>
-						<button
-							type="submit"
-							className="py-1 px-2 flex items-center justify-center border border-red-600 text-lg font-semibold w-auto mt-2 mb-4 mx-auto rounded-md hover:bg-slate-200 hover:border-slate-900 hover:text-gray-700 transition-all"
-							onClick={handleGoogle}>
-							<FcGoogle className="mr-2" />
-							Sign in with Google
-						</button>
-					</div>
-					<p className="text-center text-sm">
-						Already have an account?
-						<Link to="/login" className="text-blue-500">
-							Log In
+					<p className="text-center text-lg">
+						<Link to="/" className="text-blue-500 hover:underline">
+							Cancel
 						</Link>
 					</p>
-				</div>
+				</form>
 			</div>
 		</div>
 	);
