@@ -2,6 +2,9 @@ import React, { useRef, useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import lamusica from "../images/lamusicatext.png";
 import { Link, useNavigate, useLocation } from "react-router-dom";
+import app from "../firebase";
+
+const db = app.firestore();
 
 function Login() {
 	const emailRef = useRef();
@@ -21,7 +24,12 @@ function Login() {
 			setError("");
 			setLoading(true);
 			await logIn(emailRef.current.value, passwordRef.current.value);
+
 			navigate(from, { replace: true });
+
+			db.collection("Songs").doc("Audio").set({
+				name: "Audio",
+			});
 		} catch (err) {
 			setError("Failed to sign in");
 			console.log(err);

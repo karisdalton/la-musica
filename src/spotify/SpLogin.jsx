@@ -5,7 +5,7 @@ const AUTH_URL =
 
 export default function SpotifyLogin() {
 	return (
-		<div className="p-4 absolute left-72 top-14 flex flex-row justify-center items-center w-[calc(100% - 288px)]">
+		<div className="p-4 absolute left-72 top-14 flex flex-row justify-center items-center w-[calc(100%-288px)]">
 			<a
 				className="text-slate-500 transition-all px-4 py-2 rounded-full bg-green-400 hover:bg-green-500 hover:text-slate-700"
 				href={AUTH_URL}>

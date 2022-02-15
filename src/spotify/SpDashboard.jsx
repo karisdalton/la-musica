@@ -75,7 +75,7 @@ function SpDashboard({ code }) {
 	}, [search, accessToken]);
 
 	return (
-		<div className="p-4 absolute flex left-72 top-14 w-[calc(100% - 288px)]">
+		<div className="p-4 absolute flex left-72 top-14 w-[calc(100%-288px)]">
 			<div>
 				<label className="relative block w-96">
 					<span className="absolute inset-y-0 left-0 flex items-center pl-2 text-slate-300">
