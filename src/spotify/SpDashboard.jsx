@@ -54,14 +54,6 @@ function SpDashboard({ code }) {
 			if (cancel) return;
 			setSearchResults(
 				res.body.tracks.items.map((track) => {
-					const smallestAlbumImage = track.album.images.reduce(
-						(smallest, image) => {
-							if (image.height < smallest.height) return image;
-							return smallest;
-						},
-						track.album.images[0]
-					);
-
 					return {
 						artist: track.artists[0].name,
 						title: track.name,
@@ -75,9 +67,9 @@ function SpDashboard({ code }) {
 	}, [search, accessToken]);
 
 	return (
-		<div className="p-4 absolute flex left-72 top-14 w-[calc(100%-288px)]">
-			<div>
-				<label className="relative block w-96">
+		<div className="p-4 absolute w-[calc(100%-1.75rem)] left-5 top-[3rem] flex md:left-72 md:top-14 md:w-[calc(100%-288px)]">
+			<div className="w-full">
+				<label className="relative block w-full">
 					<span className="absolute inset-y-0 left-0 flex items-center pl-2 text-slate-300">
 						<IoSearchOutline />
 					</span>
@@ -89,9 +81,8 @@ function SpDashboard({ code }) {
 						placeholder="Search spotify for music..."
 					/>
 				</label>
-				<div className="mt-2">
-					<span className="text-2xl text-green-500 italic">Search Results</span>
-					<div className="flex flex-wrap justify-between mb-20 mt-4">
+				<div className="mt-2 w-full">
+					<div className="flex flex-wrap justify-between mb-20 mt-4 w-full">
 						{searchResults.map((track) => (
 							<SpTrackResult
 								track={track}
@@ -100,7 +91,7 @@ function SpDashboard({ code }) {
 							/>
 						))}
 						{searchResults.length === 0 && (
-							<div className="text-center flex flex-nowrap whitespace-pre">
+							<div className="text-center text-sm overflow-hidden flex mx-auto md:flex-nowrap flex-wrap whitespace-pre">
 								{lyrics}
 							</div>
 						)}

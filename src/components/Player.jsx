@@ -8,21 +8,19 @@ const code = new URLSearchParams(window.location.search).get("code");
 function Player({ url, song, handleNext, handlePrevious }) {
 	const { currentUser } = useAuth();
 
-	return (
-		!code &&
-		currentUser && (
-			<div className="fixed bottom-0 left-0 right-0">
-				<AudioPlayer
-					src={url}
-					showSkipControls={true}
-					header={song}
-					autoPlayAfterSrcChange
-					onClickNext={handleNext}
-					onClickPrevious={handlePrevious}
-					className="header:font-semibold"
-				/>
-			</div>
-		)
+	return !code && currentUser ? (
+		<div className="fixed z-50 bottom-0 left-0 right-0">
+			<AudioPlayer
+				src={url}
+				showSkipControls={true}
+				header={song}
+				autoPlayAfterSrcChange
+				onClickNext={handleNext}
+				onClickPrevious={handlePrevious}
+			/>
+		</div>
+	) : (
+		<div></div>
 	);
 }
 

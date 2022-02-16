@@ -19,7 +19,7 @@ function Profile() {
 	};
 
 	return (
-		<div className="p-4 absolute left-72 top-14 w-[calc(100% - 288px)]">
+		<div className="p-4 absolute w-[calc(100%-1.75rem)] left-5 top-[3rem] md:left-72 md:top-14 w-[calc(100% - 288px)]">
 			<h1 className="text-3xl text-sky-600">Profile</h1>
 			{error && <p className="text-sm text-red-600 px-2 pt-2">{error}</p>}
 			<div className="mt-2">

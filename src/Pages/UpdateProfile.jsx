@@ -42,16 +42,17 @@ function SignUp() {
 	}
 
 	return (
-		<div className="p-4 absolute left-72 top-14 w-[calc(100% - 288px)] flex justify-center mx-auto">
-			<div className="">
+		<div className="p-4 absolute w-[calc(100%-1.75rem)] left-5 top-[3rem] md:left-72 md:top-14 w-[calc(100% - 288px)] flex justify-center mx-auto">
+			<div className="flex flex-col justify-center items-center w-full">
 				<h1 className="text-4xl font-bold text-center p-4">Update Profile</h1>
-				<p className="text-sm text-slate-400 p-2">
-					Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur,
-					eum!
+				<p className="text-sm text-center text-slate-400 p-2">
+					Upload and stream music to play anytime anywhere.
 				</p>
-				<form className="mb-4" onSubmit={handleSubmit}>
+				<form
+					className="mb-4 w-full flex flex-col items-center"
+					onSubmit={handleSubmit}>
 					{error && <p className="text-sm text-red-600 px-2 pt-2">{error}</p>}
-					<div className="flex flex-col mb-3">
+					<div className="flex flex-col mb-3 w-full">
 						<div className="p-2 flex flex-col">
 							<label htmlFor="email" className="text-slate-700">
 								Email
@@ -95,7 +96,7 @@ function SignUp() {
 					<button
 						type="submit"
 						disabled={loading}
-						className="p-2 cursor-pointer text-white w-1/2 mb-4 ml-28 rounded-md bg-sky-600 focus:outline-0 hover:bg-sky-500 transition-all">
+						className="p-2 cursor-pointer text-white w-1/2 mb-4 md:ml-28 rounded-md bg-sky-600 focus:outline-0 hover:bg-sky-500 transition-all">
 						Update Profile
 					</button>
 					<p className="text-center text-lg">

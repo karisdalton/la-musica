@@ -4,12 +4,11 @@ import app from "../firebase";
 import firebase from "firebase/compat/app";
 import { useAuth } from "../context/AuthContext";
 
-const storage = app.storage();
 const db = app.firestore();
+const storage = app.storage();
 
 function Uploads() {
 	const { currentUser } = useAuth();
-	const [songs, setSongs] = useState([]);
 	const [file, setFile] = useState("");
 	const [loading, setLoading] = useState(false);
 	const [message, setMessage] = useState("");
@@ -69,22 +68,13 @@ function Uploads() {
 			// );
 		} catch (err) {
 			setError("Could not upload file");
+			console.log(err);
 		}
 		setLoading(false);
 	};
 
-	useEffect(() => {
-		db.collection("Songs").onSnapshot((snapshot) => {
-			const songList = [];
-			snapshot.docs.forEach((doc) => {
-				songList.push({ ...doc.data(), id: doc.id });
-			});
-			setSongs(songList);
-		});
-	}, []);
-
 	return (
-		<div className="p-4 absolute flex items-center left-72 top-14 w-[calc(100%-288px)] h-[calc(100%-3.5rem)]">
+		<div className="p-4 absolute w-[calc(100%-1.75rem)] left-5 top-[3rem] flex items-center md:left-72 md:top-14 md:w-[calc(100%-288px)] h-[calc(100%-3.5rem)]">
 			<div className="flex flex-col items-center mx-auto w-full">
 				{message && (
 					<p className="text-sm text-green-600 px-2 pt-2">{message}</p>

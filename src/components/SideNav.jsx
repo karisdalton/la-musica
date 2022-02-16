@@ -15,12 +15,28 @@ const code = new URLSearchParams(window.location.search).get("code");
 
 function SideNav() {
 	const [activeItemIndex, setActiveItemIndex] = useState(0);
+	const [showMenu, setShowMenu] = useState(false);
 	const { currentUser } = useAuth();
 
 	return (
 		currentUser && (
-			<div className="relative">
-				<div className="flex-2 w-1/5 fixed left-0 top-14 h-full p-2 border-r border-slate-200">
+			<div className="relative bg-white z-30 transition-all">
+				<label
+					className={
+						showMenu
+							? "z-30 cursor-pointer absolute text-center text-black text-2xl xl:hidden left-60 top-[4rem]"
+							: "z-30 cursor-pointer absolute text-center text-black text-2xl xl:hidden left-2 top-[4rem]"
+					}
+					onClick={() => setShowMenu(!showMenu)}
+					htmlFor="toggle">
+					&#9776;
+				</label>
+				<div
+					className={
+						showMenu
+							? "absolute flex-2 w-3/4 md:w-1/5 md:fixed left-0 top-14 h-screen bg-white p-2 border-r md:border-r-slate-200"
+							: "hidden md:flex md:flex-col absolute flex-2 md:w-1/5 md:fixed left-0 bg-white top-14 h-full p-2 border-r md:border-r-slate-200"
+					}>
 					<h1 className="text-lg uppercase font-bold py-2 pl-1 border-b border-slate-200">
 						Library
 					</h1>

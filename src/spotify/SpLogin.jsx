@@ -5,11 +5,15 @@ const AUTH_URL =
 
 export default function SpotifyLogin() {
 	return (
-		<div className="p-4 absolute left-72 top-14 flex flex-row justify-center items-center w-[calc(100%-288px)]">
+		<div className="p-4 absolute h-[calc(100%-6.5rem)] w-[calc(100%-1.75rem)] left-5 top-[3rem] md:left-72 md:top-14 flex flex-col justify-center items-center md:w-[calc(100%-288px)]">
+			<p className="text-center text-orange-600 mb-2">
+				<span className="text-lg font-semibold text-orange-700">NOTE:</span>
+				This will only work with a premium spotify account!
+			</p>
 			<a
 				className="text-slate-500 transition-all px-4 py-2 rounded-full bg-green-400 hover:bg-green-500 hover:text-slate-700"
 				href={AUTH_URL}>
-				Login with Spotify
+				Login to Spotify
 			</a>
 		</div>
 	);

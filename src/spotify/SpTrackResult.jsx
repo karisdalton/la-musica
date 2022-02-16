@@ -8,12 +8,12 @@ function SpTrackResult({ track, chooseTrack }) {
 
 	return (
 		<div
-			className="relative mb-7 last:mb-3 w-48 h-auto cursor-pointer shadow-xl"
+			className="relative mb-7 last:mb-3 w-36 h-auto p-3 md:w-48 md:h-auto cursor-pointer shadow-sm bg-slate-100 hover:shadow-xl"
 			onClick={handlePlay}>
 			<img
 				src={track.albumUrl}
 				alt="albumImg"
-				className="w-48 h-48 object-cover peer"
+				className="w-36 h-30 md:w-48 md:h-48 object-cover peer"
 			/>
 			<div className="flex flex-col px-2 py-3 peer">
 				<span className="truncate">{track.title}</span>

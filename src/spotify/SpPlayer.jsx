@@ -14,7 +14,7 @@ function SpPlayer({ accessToken, trackUri }) {
 
 	return (
 		code && (
-			<div className="fixed bottom-0 right-5 left-[18rem] p-4">
+			<div className="fixed z-40 bottom-0 right-0 left-0">
 				<SpotifyPlayer
 					token={accessToken}
 					showSaveIcon

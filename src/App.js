@@ -19,6 +19,7 @@ import SpDashboard from "./spotify/SpDashboard";
 import RequireAuth from "./components/RequireAuth";
 import app from "./firebase";
 import { auth } from "./firebase";
+import About from "./Pages/About";
 
 const code = new URLSearchParams(window.location.search).get("code");
 const db = app.firestore();
@@ -53,16 +54,14 @@ function App() {
 	};
 
 	useEffect(() => {
-		auth.currentUser !== null &&
+		loggedIn() &&
 			db
 				.collection("Songs")
 				.doc(auth.currentUser.uid)
 				.onSnapshot((doc) => {
 					setAudio(doc.data().audio || []);
 				});
-		console.log(loggedIn());
-		// console.log(auth.currentUser.uid);
-	}, []);
+	}, [audio]);
 
 	return (
 		<div className="App">
@@ -83,6 +82,7 @@ function App() {
 						<Route element={<Search />} path="/search" />
 						<Route element={<Uploads />} path="/uploads" />
 						<Route element={<Profile />} path="/profile" />
+						<Route element={<About />} path="/about" />
 						<Route element={<UpdateProfile />} path="/update-profile" />
 						{code ? (
 							<Route
