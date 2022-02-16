@@ -1,39 +1,31 @@
-import { useState, useEffect } from "react";
 import musicLogo from "../images/lamusica_transparent.png";
-import { IoCloudDownloadOutline, IoHeartOutline } from "react-icons/io5";
+import {
+	IoCloudDownloadOutline,
+	IoHeartOutline,
+	IoPlay,
+} from "react-icons/io5";
 import { HiOutlineDotsHorizontal } from "react-icons/hi";
 import app from "../firebase";
-import jsmediatags from "jsmediatags";
+// import jsmediatags from "jsmediatags";
 
 const db = app.firestore();
 
-function MusicList() {
-	const [audio, setAudio] = useState([]);
-	let tags = {};
-	const url = audio?.map((file) => {
-		return file.url;
-	});
+function MusicList({ audio, handlePlay }) {
+	// let tags = {};
+	// const url = audio?.map((file) => {
+	// 	return file.url;
+	// });
 
-	audio?.map((file) => {
-		new jsmediatags.Reader(file.url).read({
-			onSuccess: (tag) => {
-				tags = tag;
-			},
-			onError: (err) => {
-				console.log(err);
-			},
-		});
-	});
-
-	console.log(tags);
-
-	useEffect(() => {
-		db.collection("Songs")
-			.doc("Audio")
-			.onSnapshot((doc) => {
-				setAudio(doc.data().audio || []);
-			});
-	}, []);
+	// audio?.map((file) => {
+	// 	new jsmediatags.Reader(file.url).read({
+	// 		onSuccess: (tag) => {
+	// 			tags = tag;
+	// 		},
+	// 		onError: (err) => {
+	// 			console.log(err);
+	// 		},
+	// 	});
+	// });
 
 	return (
 		<div className="p-4 absolute left-72 top-14 w-[calc(100%-18rem)]">
@@ -41,16 +33,18 @@ function MusicList() {
 			{audio &&
 				audio.map((song, index) => (
 					<div
-						className="shadow-md flex items-center justify-between mt-4 px-4 py-1 w-full"
+						className="shadow-md flex items-center justify-between mt-4 px-4 py-1 w-full cursor-pointer hover:bg-slate-100 transition-all peer"
 						key={index}>
 						<img
 							src={musicLogo}
 							alt="musicLogo"
 							className="h-10 object-cover"
 						/>
-						<div className="flex flex-col ml-5">
-							<span className="">{song.name}</span>
-							<span className="text-sm text-sky-500 cursor-pointer hover:underline">
+						<div
+							className="flex flex-col ml-5"
+							onClick={() => handlePlay(index)}>
+							<span className="truncate">{song.name}</span>
+							<span className="text-sm text-sky-500">
 								The Kid LAROI, Justin Beiber
 							</span>
 						</div>
@@ -61,9 +55,11 @@ function MusicList() {
 							<span className="text-sm text-slate-500 ml-10 mr-4">06:10</span>
 						</div>
 						<div className="flex items-center ml-auto">
-							<span className="mx-4 cursor-pointer">
+							<a
+								href={song.url}
+								className="mx-4 cursor-pointer hover:bg-slate-500 rounded-full p-1">
 								<IoCloudDownloadOutline />
-							</span>
+							</a>
 							<span className="mx-4 cursor-pointer">
 								<IoHeartOutline />
 							</span>
@@ -71,6 +67,7 @@ function MusicList() {
 								<HiOutlineDotsHorizontal />
 							</span>
 						</div>
+						<IoPlay className="absolute z-index-30 top-[4.7rem] left-10 text-slate-700 w-8 h-8 hidden peer-hover:inline-flex" />
 					</div>
 				))}
 		</div>

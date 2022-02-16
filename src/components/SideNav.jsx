@@ -7,7 +7,6 @@ import {
 	IoMusicalNotesOutline,
 	IoSearchOutline,
 } from "react-icons/io5";
-import { MdPlaylistPlay } from "react-icons/md";
 import { RiSpotifyLine } from "react-icons/ri";
 import { Link } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
@@ -21,7 +20,7 @@ function SideNav() {
 	return (
 		currentUser && (
 			<div className="relative">
-				<div className="flex-2 w-1/5 fixed left-0 top-14 h-screen p-2 border-r border-slate-200">
+				<div className="flex-2 w-1/5 fixed left-0 top-14 h-full p-2 border-r border-slate-200">
 					<h1 className="text-lg uppercase font-bold py-2 pl-1 border-b border-slate-200">
 						Library
 					</h1>

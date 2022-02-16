@@ -1,12 +1,28 @@
 import React from "react";
 import AudioPlayer from "react-h5-audio-player";
 import "react-h5-audio-player/lib/styles.css";
+import { useAuth } from "../context/AuthContext";
 
-function Player() {
+const code = new URLSearchParams(window.location.search).get("code");
+
+function Player({ url, song, handleNext, handlePrevious }) {
+	const { currentUser } = useAuth();
+
 	return (
-		<div className="fixed bottom-0 left-[16.9rem] right-0 hidden">
-			<AudioPlayer showSkipControls={true} />
-		</div>
+		!code &&
+		currentUser && (
+			<div className="fixed bottom-0 left-0 right-0">
+				<AudioPlayer
+					src={url}
+					showSkipControls={true}
+					header={song}
+					autoPlayAfterSrcChange
+					onClickNext={handleNext}
+					onClickPrevious={handlePrevious}
+					className="header:font-semibold"
+				/>
+			</div>
+		)
 	);
 }
 

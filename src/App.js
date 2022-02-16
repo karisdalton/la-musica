@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
 import SignUp from "./Pages/SignUp";
 import Login from "./Pages/Login";
@@ -16,11 +17,53 @@ import PasswordReset from "./Pages/PasswordReset";
 import SpLogin from "./spotify/SpLogin";
 import SpDashboard from "./spotify/SpDashboard";
 import RequireAuth from "./components/RequireAuth";
-import HideNavs from "./components/HideNavs";
+import app from "./firebase";
+import { auth } from "./firebase";
 
 const code = new URLSearchParams(window.location.search).get("code");
+const db = app.firestore();
 
 function App() {
+	const [audio, setAudio] = useState([]);
+	const [song, setSong] = useState("");
+	const [currentSongIndex, setCurrentSongIndex] = useState(0);
+	const [url, setUrl] = useState("");
+
+	const handlePlay = (index) => {
+		setUrl(audio[index].url);
+		setSong(audio[index].name);
+	};
+
+	const loggedIn = () => {
+		return auth.currentUser !== null;
+	};
+
+	console.log(loggedIn());
+
+	const handleNext = () => {
+		const nextSong =
+			currentSongIndex === 0 ? audio.length - 1 : currentSongIndex - 1;
+		setCurrentSongIndex(nextSong);
+	};
+
+	const handlePrevious = () => {
+		const prevSong =
+			currentSongIndex < audio.length - 1 ? currentSongIndex + 1 : 0;
+		setCurrentSongIndex(prevSong);
+	};
+
+	useEffect(() => {
+		auth.currentUser !== null &&
+			db
+				.collection("Songs")
+				.doc(auth.currentUser.uid)
+				.onSnapshot((doc) => {
+					setAudio(doc.data().audio || []);
+				});
+		console.log(loggedIn());
+		// console.log(auth.currentUser.uid);
+	}, []);
+
 	return (
 		<div className="App">
 			<AuthProvider>
@@ -28,8 +71,14 @@ function App() {
 				<SideNav />
 				<Routes>
 					<Route element={<RequireAuth />}>
-						<Route element={<Home />} path="/" />
-						<Route element={<MusicList />} path="/mymusic" />
+						<Route
+							element={<Home audio={audio} handlePlay={handlePlay} />}
+							path="/"
+						/>
+						<Route
+							element={<MusicList audio={audio} handlePlay={handlePlay} />}
+							path="/mymusic"
+						/>
 						<Route element={<LikedSongs />} path="/likedsongs" />
 						<Route element={<Search />} path="/search" />
 						<Route element={<Uploads />} path="/uploads" />
@@ -48,7 +97,12 @@ function App() {
 					<Route element={<SignUp />} path="/signup" />
 					<Route element={<Login />} path="/login" />
 				</Routes>
-				<Player />
+				<Player
+					url={url}
+					song={song}
+					handleNext={handleNext}
+					handlePrevious={handlePrevious}
+				/>
 			</AuthProvider>
 		</div>
 	);

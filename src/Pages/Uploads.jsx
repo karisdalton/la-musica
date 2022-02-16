@@ -2,14 +2,15 @@ import React, { useEffect, useState } from "react";
 import upload from "../images/upload_240px.png";
 import app from "../firebase";
 import firebase from "firebase/compat/app";
+import { useAuth } from "../context/AuthContext";
 
 const storage = app.storage();
 const db = app.firestore();
 
 function Uploads() {
+	const { currentUser } = useAuth();
 	const [songs, setSongs] = useState([]);
 	const [file, setFile] = useState("");
-	const [url, setUrl] = useState("");
 	const [loading, setLoading] = useState(false);
 	const [message, setMessage] = useState("");
 	const [error, setError] = useState("");
@@ -33,7 +34,7 @@ function Uploads() {
 			const fileRef = storageRef.child(file.name);
 			await fileRef.put(file);
 			db.collection("Songs")
-				.doc("Audio")
+				.doc(currentUser.uid)
 				.update({
 					audio: firebase.firestore.FieldValue.arrayUnion({
 						name: file.name,
@@ -68,7 +69,6 @@ function Uploads() {
 			// );
 		} catch (err) {
 			setError("Could not upload file");
-			console.log(err);
 		}
 		setLoading(false);
 	};
@@ -97,7 +97,7 @@ function Uploads() {
 						<input
 							type="file"
 							className="block w-full text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file-text-sm file:font-semibold file:bg-sky-100 file:text-sky-700 hover:file:bg-sky-200"
-							accept="audio/*"
+							accept=".mp3, .mpeg"
 							onChange={handleFile}
 							multiple
 						/>
