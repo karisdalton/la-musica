@@ -20,6 +20,7 @@ import RequireAuth from "./components/RequireAuth";
 import app from "./firebase";
 import { auth } from "./firebase";
 import About from "./Pages/About";
+import SearchResults from "./Pages/SearchResults";
 
 const code = new URLSearchParams(window.location.search).get("code");
 const db = app.firestore();
@@ -29,17 +30,17 @@ function App() {
 	const [song, setSong] = useState("");
 	const [currentSongIndex, setCurrentSongIndex] = useState(0);
 	const [url, setUrl] = useState("");
+	const [playing, setPlaying] = useState();
 
 	const handlePlay = (index) => {
 		setUrl(audio[index].url);
 		setSong(audio[index].name);
+		setPlaying(audio[index].name);
 	};
 
 	const loggedIn = () => {
 		return auth.currentUser !== null;
 	};
-
-	console.log(loggedIn());
 
 	const handleNext = () => {
 		const nextSong =
@@ -61,7 +62,7 @@ function App() {
 				.onSnapshot((doc) => {
 					setAudio(doc.data().audio || []);
 				});
-	}, [audio]);
+	}, []);
 
 	return (
 		<div className="App">
@@ -71,15 +72,24 @@ function App() {
 				<Routes>
 					<Route element={<RequireAuth />}>
 						<Route
-							element={<Home audio={audio} handlePlay={handlePlay} />}
+							element={
+								<Home audio={audio} handlePlay={handlePlay} playing={playing} />
+							}
 							path="/"
 						/>
 						<Route
-							element={<MusicList audio={audio} handlePlay={handlePlay} />}
+							element={
+								<MusicList
+									audio={audio}
+									handlePlay={handlePlay}
+									playing={playing}
+								/>
+							}
 							path="/mymusic"
 						/>
 						<Route element={<LikedSongs />} path="/likedsongs" />
 						<Route element={<Search />} path="/search" />
+						<Route element={<SearchResults />} path="/search-results" />
 						<Route element={<Uploads />} path="/uploads" />
 						<Route element={<Profile />} path="/profile" />
 						<Route element={<About />} path="/about" />

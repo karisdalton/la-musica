@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
@@ -56,7 +56,7 @@ function Login() {
 						Login
 					</h1>
 				</div>
-				<p className="text-sm text-slate-400 p-2 text-center">
+				<p className="text-sm text-slate-400 p-2 text-center font-info">
 					Upload and stream music to play anytime anywhere.
 				</p>
 				<form
@@ -92,14 +92,14 @@ function Login() {
 					<button
 						type="submit"
 						disabled={loading}
-						className="p-2 text-white w-1/2 mb-2 rounded-md bg-blue-600 focus:outline-0">
+						className="p-2 text-white w-1/2 mb-2 rounded-md bg-blue-600 focus:outline-0 font-button">
 						Log In
 					</button>
 					<p className="text-sm text-slate-600 text-center">Or sign in with</p>
 					<div>
 						<button
 							type="submit"
-							className="py-1 px-2 flex items-center justify-center border border-red-600 text-lg font-semibold w-auto mt-2 mb-4 mx-auto rounded-md hover:bg-slate-200 hover:border-slate-900 hover:text-gray-700 transition-all"
+							className="py-1 px-2 flex items-center justify-center border border-red-600 text-lg font-semibold w-auto mt-2 mb-4 mx-auto rounded-md hover:bg-slate-200 hover:border-slate-900 hover:text-gray-700 transition-all font-button"
 							onClick={handleGoogle}>
 							<FcGoogle className="mr-2" />
 							Sign in with Google

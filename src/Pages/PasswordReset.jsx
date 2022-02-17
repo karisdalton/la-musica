@@ -34,7 +34,7 @@ function PasswordReset() {
 				<div className="flex">
 					<h1 className="text-4xl font-bold text-center p-4">Password Reset</h1>
 				</div>
-				<p className="text-sm text-center text-slate-400 p-2">
+				<p className="text-sm text-center text-slate-400 p-2 font-info">
 					Upload and stream music to play anytime anywhere.
 				</p>
 				<form
@@ -61,7 +61,7 @@ function PasswordReset() {
 					<button
 						type="submit"
 						disabled={loading}
-						className="p-2 text-white w-1/2 mb-2 rounded-md bg-blue-600 focus:outline-0">
+						className="p-2 text-white w-1/2 mb-2 rounded-md bg-blue-600 focus:outline-0 font-button">
 						Reset Password
 					</button>
 					<div className="text-center transition-all text-sky-500 hover:underline mb-4">

@@ -42,7 +42,7 @@ function LikedSongs() {
 							<IoHeartOutline />
 						</span>
 					</div>
-					<IoPlay className="absolute z-30 top-[5.7rem] left-[3.4rem] text-slate-700 w-8 h-8 hidden peer-hover:inline-flex" />
+					<IoPlay className="absolute z-30 left-[3.4rem] text-slate-700 w-8 h-8 hidden peer-hover:inline-flex" />
 				</div>
 			</div>
 		</div>

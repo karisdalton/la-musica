@@ -29,11 +29,11 @@ function Profile() {
 				</div>
 				<Link
 					to="/update-profile"
-					className="border border-sky-500 px-4 py-1 rounded-md hover:bg-sky-200 hover:text-slate-600 mr-3">
+					className="border border-sky-500 font-button px-4 py-1 rounded-md hover:bg-sky-200 hover:text-slate-600 mr-3">
 					Update Profile
 				</Link>
 				<button
-					className="border border-sky-500 py-1 px-4 rounded-md mt-4 hover:bg-slate-400 hover:text-white"
+					className="border border-sky-500 font-button py-1 px-4 rounded-md mt-4 hover:bg-slate-400 hover:text-white"
 					onClick={handleLogout}>
 					Log Out
 				</button>

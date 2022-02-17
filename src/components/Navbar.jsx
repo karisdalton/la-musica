@@ -5,9 +5,20 @@ import Search from "./Search";
 import logo from "../images/oie_transparent2.png";
 import { useAuth } from "../context/AuthContext";
 import { IoSearchOutline } from "react-icons/io5";
+import { useNavigate } from "react-router-dom";
 
 function Navbar() {
 	const { currentUser } = useAuth();
+	const navigate = useNavigate();
+
+	const handleSearch = (e) => {
+		e.preventDefault();
+
+		const searchTerm = e.target.value;
+
+		navigate(`/search-results?term=${searchTerm}`);
+		console.log(e.target.value);
+	};
 
 	return (
 		currentUser && (
@@ -31,6 +42,7 @@ function Navbar() {
 								"w-full border block py-1 pl-7 md:py-2 md:pl-9 md:w-full rounded-md border-slate-300 focus:outline-0 placeholder:italic placeholder:text-slate-400 shadow-sm focus:border-sky-500 focus:ring-sky-500 focus:ring-1"
 							}
 							placeholder="Search for music..."
+							onChange={handleSearch}
 						/>
 					</label>
 				</form>

@@ -9,7 +9,7 @@ function Player({ url, song, handleNext, handlePrevious }) {
 	const { currentUser } = useAuth();
 
 	return !code && currentUser ? (
-		<div className="fixed z-50 bottom-0 left-0 right-0">
+		<div className="fixed z-50 bottom-0 left-0 right-0 font-player">
 			<AudioPlayer
 				src={url}
 				showSkipControls={true}

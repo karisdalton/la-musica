@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import upload from "../images/upload_240px.png";
+import loader from "../images/loader.png";
 import app from "../firebase";
 import firebase from "firebase/compat/app";
 import { useAuth } from "../context/AuthContext";
@@ -13,6 +14,7 @@ function Uploads() {
 	const [loading, setLoading] = useState(false);
 	const [message, setMessage] = useState("");
 	const [error, setError] = useState("");
+	const [like, setLike] = useState(false);
 
 	const handleFile = (e) => {
 		setMessage("");
@@ -38,34 +40,11 @@ function Uploads() {
 					audio: firebase.firestore.FieldValue.arrayUnion({
 						name: file.name,
 						url: await fileRef.getDownloadURL(),
+						likeState: like,
 					}),
 				});
+			setLike(false);
 			setMessage("File uploaded successfully");
-
-			// const uploadTask = storage.ref(`Audio/${file.name}`).put(file);
-			// uploadTask.on(
-			// 	"state_changed",
-			// 	(snapshot) => {
-			// 		const progress = Math.round(
-			// 			(snapshot.bytesTransferred / snapshot.totalBytes) * 100
-			// 		);
-			// 		setProgress(progress);
-			// 		progress === 100 && setMessage("File uploaded successfully");
-			// 		setSize(snapshot.totalBytes * 0.00000095367432);
-			// 	},
-			// 	(error) => {
-			// 		console.log(error);
-			// 	},
-			// 	() => {
-			// 		storage
-			// 			.ref("Audio")
-			// 			.child(file.name)
-			// 			.getDownloadURL()
-			// 			.then((url) => {
-			// 				setUrl(url);
-			// 			});
-			// 	}
-			// );
 		} catch (err) {
 			setError("Could not upload file");
 			console.log(err);
@@ -80,7 +59,11 @@ function Uploads() {
 					<p className="text-sm text-green-600 px-2 pt-2">{message}</p>
 				)}
 				{error && <p className="text-sm text-red-600 px-2 pt-2">{error}</p>}
-				<img src={upload} alt="upload" className="h-40 w-40" />
+				{loading ? (
+					<img src={loader} alt="upload" className="h-40 w-40" />
+				) : (
+					<img src={upload} alt="upload" className="h-40 w-40" />
+				)}
 				<form className="w-full" onSubmit={handleUpload}>
 					<label className="block mt-2">
 						<span className="sr-only">Choose audio file</span>
@@ -89,11 +72,14 @@ function Uploads() {
 							className="block w-full text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file-text-sm file:font-semibold file:bg-sky-100 file:text-sky-700 hover:file:bg-sky-200"
 							accept=".mp3, .mpeg"
 							onChange={handleFile}
-							multiple
 						/>
 					</label>
 					<button
-						className="rounded-full transition-all mt-3 py-2 w-full text-slate-500 bg-sky-200 hover:bg-sky-300 hover:text-sky-700"
+						className={
+							loading
+								? "rounded-full transition-all mt-3 py-2 w-full text-slate-500 bg-sky-200 disabled"
+								: "rounded-full transition-all mt-3 py-2 w-full text-slate-500 bg-sky-200 hover:bg-sky-300 hover:text-sky-700"
+						}
 						disabled={loading}>
 						Upload
 					</button>

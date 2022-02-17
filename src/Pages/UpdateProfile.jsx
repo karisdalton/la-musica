@@ -42,10 +42,10 @@ function SignUp() {
 	}
 
 	return (
-		<div className="p-4 absolute w-[calc(100%-1.75rem)] left-5 top-[3rem] md:left-72 md:top-14 w-[calc(100% - 288px)] flex justify-center mx-auto">
-			<div className="flex flex-col justify-center items-center w-full">
+		<div className="p-4 absolute w-[calc(100%-1.75rem)] left-5 top-[3rem] md:left-72 md:top-14 md:w-[calc(100%-18rem)] flex justify-center mx-auto">
+			<div className="flex flex-col justify-center items-center w-full md:w-3/4">
 				<h1 className="text-4xl font-bold text-center p-4">Update Profile</h1>
-				<p className="text-sm text-center text-slate-400 p-2">
+				<p className="text-sm text-center text-slate-400 p-2 font-info">
 					Upload and stream music to play anytime anywhere.
 				</p>
 				<form
@@ -96,11 +96,13 @@ function SignUp() {
 					<button
 						type="submit"
 						disabled={loading}
-						className="p-2 cursor-pointer text-white w-1/2 mb-4 md:ml-28 rounded-md bg-sky-600 focus:outline-0 hover:bg-sky-500 transition-all">
+						className="p-2 cursor-pointer text-white w-1/2 mb-4 rounded-md bg-sky-600 focus:outline-0 hover:bg-sky-500 transition-all font-button">
 						Update Profile
 					</button>
 					<p className="text-center text-lg">
-						<Link to="/" className="text-blue-500 hover:underline">
+						<Link
+							to="/"
+							className="text-blue-500 hover:border hover:border-slate-400 rounded-full p-2 font-button">
 							Cancel
 						</Link>
 					</p>

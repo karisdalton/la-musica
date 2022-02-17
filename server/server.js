@@ -3,6 +3,7 @@ const SpotifyWebApi = require("spotify-web-api-node");
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const lyricsFinder = require("lyrics-finder");
+const serverless = require("serverless-http");
 
 const app = express();
 app.use(cors());
@@ -63,3 +64,4 @@ app.get("/lyrics", async (req, res) => {
 });
 
 app.listen(3001);
+module.exports.handler = serverless(app);

@@ -3,30 +3,34 @@ import musicLogo from "../images/lamusica_transparent.png";
 import {
 	IoCloudDownloadOutline,
 	IoHeartOutline,
+	IoHeartSharp,
 	IoPlay,
 } from "react-icons/io5";
-import { HiOutlineDotsHorizontal } from "react-icons/hi";
 import app from "../firebase";
-// import jsmediatags from "jsmediatags";
+import firebase from "firebase/compat/app";
+import { useAuth } from "../context/AuthContext";
 
 const db = app.firestore();
 
-function MusicList({ audio, handlePlay }) {
-	// let tags = {};
-	// const url = audio?.map((file) => {
-	// 	return file.url;
-	// });
+function MusicList({ audio, handlePlay, playing }) {
+	const { currentUser } = useAuth();
+	const [like, setLike] = useState(false);
 
-	// audio?.map((file) => {
-	// 	new jsmediatags.Reader(file.url).read({
-	// 		onSuccess: (tag) => {
-	// 			tags = tag;
-	// 		},
-	// 		onError: (err) => {
-	// 			console.log(err);
-	// 		},
-	// 	});
-	// });
+	const handleLike = async (index) => {
+		// try {
+		// 	db.collection("Songs")
+		// 		.doc(currentUser.uid)
+		// 		.update({
+		// 			// [`audio.${index}.likeState`]: like,
+		// 			audio: firebase.firestore.FieldValue.arrayUnion({
+		// 				likeState: like,
+		// 			}),
+		// 		});
+		// 	setLike(!like);
+		// } catch (error) {
+		// 	console.log(error);
+		// }
+	};
 
 	return (
 		<div className="p-4 absolute w-[calc(100%-1.75rem)] left-5 top-[3rem] md:left-72 md:top-14 md:w-[calc(100%-18rem)]">
@@ -34,7 +38,11 @@ function MusicList({ audio, handlePlay }) {
 			{audio &&
 				audio.map((song, index) => (
 					<div
-						className="shadow-md flex items-center w-full cursor-pointer rounded-md px-2 mt-2 hover:bg-slate-100 transition-all"
+						className={
+							playing === song.name
+								? "shadow-md flex items-center w-full cursor-pointer rounded-md px-2 mt-2 bg-slate-200 transition-all"
+								: "shadow-md flex items-center w-full cursor-pointer rounded-md px-2 mt-2 hover:bg-slate-100 transition-all"
+						}
 						key={index}>
 						<img
 							src={musicLogo}
@@ -45,27 +53,35 @@ function MusicList({ audio, handlePlay }) {
 							className="flex flex-col ml-5 peer"
 							onClick={() => handlePlay(index)}>
 							<span className="text-sm">{song.name}</span>
-							<span className="text-sm text-sky-500">
-								The Kid LAROI, Justin Beiber
-							</span>
+							<span className="text-sm text-sky-500">unknown artist</span>
 						</div>
-						{/* <div className="mx-auto flex justify-between items-center">
-							<span className="text-sm text-slate-500 ml-10">
-								Unknown album
-							</span>
-							<span className="text-sm text-slate-500 ml-10 mr-4">06:10</span>
-						</div> */}
 						<div className="flex items-center ml-auto">
 							<a
 								href={song.url}
 								className="mx-4 cursor-pointer hover:bg-slate-500 rounded-full p-1">
 								<IoCloudDownloadOutline />
 							</a>
-							<span className="mx-4 cursor-pointer hover:bg-slate-500 rounded-full p-1">
-								<IoHeartOutline />
-							</span>
+							{!song.likeState ? (
+								<span
+									className="mx-4 cursor-pointer hover:bg-slate-500 rounded-full p-1"
+									onClick={() => handleLike(index)}>
+									<IoHeartOutline />
+								</span>
+							) : (
+								<span
+									className="mx-4 cursor-pointer text-sky-500 hover:bg-slate-500 rounded-full p-1"
+									onClick={() => handleLike(index)}>
+									<IoHeartSharp />
+								</span>
+							)}
 						</div>
-						<IoPlay className="absolute z-30 top-[4rem] left-9 text-slate-700 w-8 h-8 hidden peer-hover:inline-flex" />
+						<IoPlay
+							className={
+								playing === song.name
+									? "absolute z-30 left-9 text-blue-500 w-8 h-8"
+									: "absolute z-30 left-9 text-slate-500 w-8 h-8 hidden peer-hover:inline-flex"
+							}
+						/>
 					</div>
 				))}
 		</div>
