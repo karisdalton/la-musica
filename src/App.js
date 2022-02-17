@@ -28,7 +28,6 @@ const db = app.firestore();
 function App() {
 	const [audio, setAudio] = useState([]);
 	const [song, setSong] = useState("");
-	const [currentSongIndex, setCurrentSongIndex] = useState(0);
 	const [url, setUrl] = useState("");
 	const [playing, setPlaying] = useState();
 
