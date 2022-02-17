@@ -39,8 +39,10 @@ function App() {
 	};
 
 	const loggedIn = () => {
-		return auth.currentUser !== null;
+		return auth.currentUser.uid !== null;
 	};
+
+	console.log(loggedIn());
 
 	const handleNext = () => {
 		const nextSong =
