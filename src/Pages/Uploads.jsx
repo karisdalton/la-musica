@@ -36,13 +36,16 @@ function Uploads() {
 			await fileRef.put(file);
 			db.collection("Songs")
 				.doc(currentUser.uid)
-				.update({
-					audio: firebase.firestore.FieldValue.arrayUnion({
-						name: file.name,
-						url: await fileRef.getDownloadURL(),
-						likeState: like,
-					}),
-				});
+				.set(
+					{
+						audio: firebase.firestore.FieldValue.arrayUnion({
+							name: file.name,
+							url: await fileRef.getDownloadURL(),
+							likeState: like,
+						}),
+					},
+					{ merge: true }
+				);
 			setLike(false);
 			setMessage("File uploaded successfully");
 		} catch (err) {

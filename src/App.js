@@ -64,7 +64,7 @@ function App() {
 				.onSnapshot((doc) => {
 					setAudio(doc.data().audio || []);
 				});
-	}, []);
+	}, [audio]);
 
 	return (
 		<div className="App">
