@@ -14,7 +14,7 @@ app.post("/refresh", (req, res) => {
 	const refreshToken = req.body.refreshToken;
 
 	const spotifyApi = new SpotifyWebApi({
-		redirectUri: "http://localhost:3000/spdashboard",
+		redirectUri: "https://lamusica.netlify.app/spdashboard",
 		clientId: "0ce32643c7d749ec83b63ad25c85dc8d",
 		clientSecret: "cc0c62d5b30f44caaefd1276cc99005d",
 		refreshToken,
@@ -37,7 +37,7 @@ app.post("/slogin", (req, res) => {
 	const code = req.body.code;
 
 	const spotifyApi = new SpotifyWebApi({
-		redirectUri: "http://localhost:3000/spdashboard",
+		redirectUri: "https://lamusica.netlify.app/spdashboard",
 		clientId: "0ce32643c7d749ec83b63ad25c85dc8d",
 		clientSecret: "cc0c62d5b30f44caaefd1276cc99005d",
 	});

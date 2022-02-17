@@ -1,7 +1,7 @@
 import React from "react";
 
 const AUTH_URL =
-	"https://accounts.spotify.com/authorize?client_id=0ce32643c7d749ec83b63ad25c85dc8d&response_type=code&redirect_uri=http://localhost:3000/spdashboard&scope=streaming%20user-read-email%20user-read-private%20user-library-read%20user-library-modify%20user-read-playback-state%20user-modify-playback-state";
+	"https://accounts.spotify.com/authorize?client_id=0ce32643c7d749ec83b63ad25c85dc8d&response_type=code&redirect_uri=https://lamusica.netlify.app/spdashboard&scope=streaming%20user-read-email%20user-read-private%20user-library-read%20user-library-modify%20user-read-playback-state%20user-modify-playback-state";
 
 export default function SpotifyLogin() {
 	return (
