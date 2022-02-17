@@ -44,18 +44,6 @@ function App() {
 
 	console.log(loggedIn());
 
-	const handleNext = () => {
-		const nextSong =
-			currentSongIndex === 0 ? audio.length - 1 : currentSongIndex - 1;
-		setCurrentSongIndex(nextSong);
-	};
-
-	const handlePrevious = () => {
-		const prevSong =
-			currentSongIndex < audio.length - 1 ? currentSongIndex + 1 : 0;
-		setCurrentSongIndex(prevSong);
-	};
-
 	useEffect(() => {
 		loggedIn() &&
 			db
@@ -64,7 +52,7 @@ function App() {
 				.onSnapshot((doc) => {
 					setAudio(doc.data().audio || []);
 				});
-	}, [audio]);
+	}, []);
 
 	return (
 		<div className="App">
@@ -109,12 +97,7 @@ function App() {
 					<Route element={<SignUp />} path="/signup" />
 					<Route element={<Login />} path="/login" />
 				</Routes>
-				<Player
-					url={url}
-					song={song}
-					handleNext={handleNext}
-					handlePrevious={handlePrevious}
-				/>
+				<Player url={url} song={song} />
 			</AuthProvider>
 		</div>
 	);

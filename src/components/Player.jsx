@@ -5,19 +5,12 @@ import { useAuth } from "../context/AuthContext";
 
 const code = new URLSearchParams(window.location.search).get("code");
 
-function Player({ url, song, handleNext, handlePrevious }) {
+function Player({ url, song }) {
 	const { currentUser } = useAuth();
 
 	return !code && currentUser ? (
 		<div className="fixed z-50 bottom-0 left-0 right-0 font-player">
-			<AudioPlayer
-				src={url}
-				showSkipControls={true}
-				header={song}
-				autoPlayAfterSrcChange
-				onClickNext={handleNext}
-				onClickPrevious={handlePrevious}
-			/>
+			<AudioPlayer src={url} header={song} autoPlayAfterSrcChange />
 		</div>
 	) : (
 		<div></div>
